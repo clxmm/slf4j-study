@@ -47,6 +47,7 @@
     <module>integration</module>
     <module>slf4j-migrator</module>
     <module>clxmm-test</module>
+    <module>clxmm-slf4j</module>
   </modules>
 
   <dependencyManagement>

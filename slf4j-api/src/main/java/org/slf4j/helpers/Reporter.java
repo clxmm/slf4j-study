@@ -76,7 +76,7 @@ public class Reporter {
      */
     static private final TargetChoice TARGET_CHOICE = getTargetChoice();
 
-    // 内部冗长
+    // 内部冗长,默认Info级别
     static private final Level INTERNAL_VERBOSITY = initVerbosity();
 
     static private TargetChoice getTargetChoice() {

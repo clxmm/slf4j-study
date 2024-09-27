@@ -116,6 +116,7 @@ public final class LoggerFactory {
 
     static boolean DETECT_LOGGER_NAME_MISMATCH = Util.safeGetBooleanSystemProperty(DETECT_LOGGER_NAME_MISMATCH_PROPERTY);
 
+    // 用于记录的提供程序
     static volatile SLF4JServiceProvider PROVIDER;
 
     // Package access for tests
@@ -172,6 +173,10 @@ public final class LoggerFactory {
      * It is LoggerFactory's responsibility to track version changes and manage
      * the compatibility list.
      * <p>
+     *
+     * LoggerFactory有责任跟踪版本更改并管理兼容性列表。<p/>
+     * API兼容性列表
+     *
      */
     static private final String[] API_COMPATIBILITY_LIST = new String[] { "2.0" };
 
@@ -197,6 +202,7 @@ public final class LoggerFactory {
     // 平台初始化
     private final static void performInitialization() {
         bind();
+        // 如果初始化成功
         if (INITIALIZATION_STATE == SUCCESSFUL_INITIALIZATION) {
             versionSanityCheck();
         }
@@ -302,6 +308,7 @@ public final class LoggerFactory {
 
     /**
      * 绑扎后清理
+     * todo 清理
      */
     private static void postBindCleanUp() {
         fixSubstituteLoggers();
@@ -390,6 +397,7 @@ public final class LoggerFactory {
         Reporter.warn("See also " + REPLAY_URL);
     }
 
+    // 版本健全性检查
     private final static void versionSanityCheck() {
         try {
             String requested = PROVIDER.getRequestedApiVersion();
@@ -434,8 +442,10 @@ public final class LoggerFactory {
         }
     }
 
+    // 报告实际绑定
     private static void reportActualBinding(List<SLF4JServiceProvider> providerList) {
         // impossible since a provider has been found
+        // 理论上不会走到这里
         if (providerList.isEmpty()) {
             throw new IllegalStateException("No providers were found which is impossible after successful initialization.");
         }
@@ -518,6 +528,7 @@ public final class LoggerFactory {
      * @since 1.8.0
      */
     static SLF4JServiceProvider getProvider() {
+        // 初始化
         if (INITIALIZATION_STATE == UNINITIALIZED) {
             synchronized (LoggerFactory.class) {
                 if (INITIALIZATION_STATE == UNINITIALIZED) {

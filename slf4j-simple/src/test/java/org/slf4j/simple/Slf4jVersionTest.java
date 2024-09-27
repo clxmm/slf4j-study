@@ -13,6 +13,7 @@ public class Slf4jVersionTest {
     public void slf4jVersionTest() {
 
         String version = Slf4jEnvUtil.slf4jVersion();
+        System.out.println("SLF4J version: " + version);
         assertNotNull(version);
         assertTrue(version.startsWith("2"));
 

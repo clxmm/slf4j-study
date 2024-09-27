@@ -42,6 +42,7 @@ public class SimpleServiceProvider implements SLF4JServiceProvider {
     @Override
     public void initialize() {
 
+        // 初始化loggerFactory
         loggerFactory = new SimpleLoggerFactory();
         markerFactory = new BasicMarkerFactory();
         mdcAdapter = new NOPMDCAdapter();

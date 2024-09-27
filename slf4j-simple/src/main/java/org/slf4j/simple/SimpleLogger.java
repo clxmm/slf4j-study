@@ -153,6 +153,7 @@ public class SimpleLogger extends LegacyAbstractLogger {
 
     private static final long START_TIME = System.currentTimeMillis();
 
+    // 日志级跟踪
     protected static final int LOG_LEVEL_TRACE = LocationAwareLogger.TRACE_INT;
     protected static final int LOG_LEVEL_DEBUG = LocationAwareLogger.DEBUG_INT;
     protected static final int LOG_LEVEL_INFO = LocationAwareLogger.INFO_INT;
@@ -172,10 +173,12 @@ public class SimpleLogger extends LegacyAbstractLogger {
     static final SimpleLoggerConfiguration CONFIG_PARAMS = new SimpleLoggerConfiguration();
     
     static void lazyInit() {
+        // 如果已经初始化过，则直接返回
         if (INITIALIZED) {
             return;
         }
         INITIALIZED = true;
+        // 初始化配置参数
         init();
     }
 

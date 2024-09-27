@@ -75,12 +75,15 @@ public class SimpleLoggerConfiguration {
     private final Properties properties = new Properties();
 
     void init() {
+        // 加载配置文件
         loadProperties();
 
         String defaultLogLevelString = getStringProperty(SimpleLogger.DEFAULT_LOG_LEVEL_KEY, null);
         if (defaultLogLevelString != null)
+            // 转换日志级别
             defaultLogLevel = stringToLevel(defaultLogLevelString);
 
+        // 读取配置文件中的其他属性
         showLogName = getBooleanProperty(SimpleLogger.SHOW_LOG_NAME_KEY, SimpleLoggerConfiguration.SHOW_LOG_NAME_DEFAULT);
         showShortLogName = getBooleanProperty(SimpleLogger.SHOW_SHORT_LOG_NAME_KEY, SHOW_SHORT_LOG_NAME_DEFAULT);
         showDateTime = getBooleanProperty(SimpleLogger.SHOW_DATE_TIME_KEY, SHOW_DATE_TIME_DEFAULT);

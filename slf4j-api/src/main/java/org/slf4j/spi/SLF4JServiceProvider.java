@@ -46,6 +46,9 @@ public interface SLF4JServiceProvider {
      * <p>For example: {@code "2.0.1"}.
      *
      * @return the string API version.
+     *
+     * <br/>
+     * 返回日志记录实现支持的SLF4J的最大API版本。
      */
     public String getRequestedApiVersion();
 
