@@ -169,6 +169,7 @@ public class SimpleLogger extends LegacyAbstractLogger {
     // no printing method associated with it in o.s.Logger interface.
     protected static final int LOG_LEVEL_OFF = LOG_LEVEL_ERROR + 10;
 
+    // 初始化标记，用于判断是否已经初始化过
     private static boolean INITIALIZED = false;
     static final SimpleLoggerConfiguration CONFIG_PARAMS = new SimpleLoggerConfiguration();
     
@@ -238,6 +239,10 @@ public class SimpleLogger extends LegacyAbstractLogger {
         }
     }
 
+    // 递归计算级别字符串
+    /**
+     * 单独为包或者类设置日志级别
+     */
     String recursivelyComputeLevelString() {
         String tempName = name;
         String levelString = null;
@@ -419,6 +424,7 @@ public class SimpleLogger extends LegacyAbstractLogger {
         buf.append(SP);
 
         // Append the name of the log instance if so configured
+        // 如果已配置，请附加日志实例的名称
         if (CONFIG_PARAMS.showShortLogName) {
             if (shortLogName == null)
                 shortLogName = computeShortName();

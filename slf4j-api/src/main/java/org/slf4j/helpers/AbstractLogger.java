@@ -408,6 +408,9 @@ public abstract class AbstractLogger implements Logger, Serializable {
 
     /**
      * Given various arguments passed as parameters, perform actual logging.
+     * <p>
+     *     给定作为参数传递的各种参数，执行实际的日志记录。
+     * </p>
      * 
      * <p>This method assumes that the separation of the args array into actual
      * objects and a throwable has been already operated.

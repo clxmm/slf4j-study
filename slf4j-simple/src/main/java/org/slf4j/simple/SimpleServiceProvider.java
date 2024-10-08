@@ -44,7 +44,9 @@ public class SimpleServiceProvider implements SLF4JServiceProvider {
 
         // 初始化loggerFactory
         loggerFactory = new SimpleLoggerFactory();
+        // 初始化markerFactory,BasicMarkerFactory是默认的基础实现
         markerFactory = new BasicMarkerFactory();
+        // 初始化mdcAdapter,NOPMDCAdapter是空实现
         mdcAdapter = new NOPMDCAdapter();
     }
 

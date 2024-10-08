@@ -459,6 +459,10 @@ public interface Logger {
      *
      * @return True if this Logger is enabled for the INFO level,
      *         false otherwise.
+     *
+     * <p>
+     *     判断是否能够输出
+     * </p>
      */
     public boolean isInfoEnabled();
 

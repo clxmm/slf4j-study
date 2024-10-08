@@ -11,21 +11,22 @@ import org.slf4j.LoggerFactory;
 public class HelloWorld {
 
 
+    private static final Logger log = LoggerFactory.getLogger(HelloWorld.class);
+
     public static void main(String[] args) {
         Logger logger = LoggerFactory.getLogger(HelloWorld.class);
-        logger.info("Hello World");
-        logger.atInfo().log("Hello World");
-
 
         int newT = 15;
         int oldT = 16;
 
         // using classical API
-        logger.debug("oldT={} newT={} Temperature changed.", oldT, newT);
+        logger.info("Hello World");
 
         // using fluent API
-        logger.atDebug().setMessage("Temperature changed.").addKeyValue("oldT", oldT).addKeyValue("newT", newT).log();
-
+        logger.atInfo()
+                .addArgument(newT)
+                .addArgument(oldT)
+                .log("newT {} has logged in with oldT {}");
     }
 
 

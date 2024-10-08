@@ -49,7 +49,9 @@ public class MarkerFactory {
     }
 
     // this is where the binding happens
+    // MARKER_FACTORY 绑定和初始化
     static {
+        System.out.println("initialize slf4j service provider...");
         SLF4JServiceProvider provider = LoggerFactory.getProvider();
         if (provider != null) {
             MARKER_FACTORY = provider.getMarkerFactory();

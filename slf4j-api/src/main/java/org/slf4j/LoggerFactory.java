@@ -122,23 +122,26 @@ public final class LoggerFactory {
     // Package access for tests
     // 查找服务提供商
     static List<SLF4JServiceProvider> findServiceProviders() {
+        // SLF4JServiceProvide具体的服务提供者
         List<SLF4JServiceProvider> providerList = new ArrayList<>();
 
         // retain behaviour similar to that of 1.7 series and earlier. More specifically, use the class loader that
         // loaded the present class to search for services
         final ClassLoader classLoaderOfLoggerFactory = LoggerFactory.class.getClassLoader();
 
+        // 指明明确的负载
         SLF4JServiceProvider explicitProvider = loadExplicitlySpecified(classLoaderOfLoggerFactory);
         if(explicitProvider != null) {
             providerList.add(explicitProvider);
             return providerList;
         }
 
-
+        // 加载SLF4JServiceProvider
          ServiceLoader<SLF4JServiceProvider> serviceLoader = getServiceLoader(classLoaderOfLoggerFactory);
 
         Iterator<SLF4JServiceProvider> iterator = serviceLoader.iterator();
         while (iterator.hasNext()) {
+            // 安全实例化SLF4JServiceProvider
             safelyInstantiate(providerList, iterator);
         }
         return providerList;
@@ -146,6 +149,8 @@ public final class LoggerFactory {
 
     /**
      * 获取服务加载器
+     * <p/>
+     * ServiceLoader加载ServiceLoader
      */
     private static ServiceLoader<SLF4JServiceProvider> getServiceLoader(final ClassLoader classLoaderOfLoggerFactory) {
         ServiceLoader<SLF4JServiceProvider> serviceLoader;
@@ -204,10 +209,12 @@ public final class LoggerFactory {
         bind();
         // 如果初始化成功
         if (INITIALIZATION_STATE == SUCCESSFUL_INITIALIZATION) {
+            // 版本检查
             versionSanityCheck();
         }
     }
 
+    // 绑定
     private final static void bind() {
         try {
             // 获取SLF4JServiceProvider的提供类
@@ -219,6 +226,7 @@ public final class LoggerFactory {
                 // 获取第一个提供者
                 PROVIDER = providersList.get(0);
                 // SLF4JServiceProvider.initialize() is intended to be called here and nowhere else.
+                // 初始化
                 PROVIDER.initialize();
                 INITIALIZATION_STATE = SUCCESSFUL_INITIALIZATION;
                 reportActualBinding(providersList);
@@ -518,6 +526,7 @@ public final class LoggerFactory {
      * @return the ILoggerFactory instance in use
      */
     public static ILoggerFactory getILoggerFactory() {
+        System.out.println("LoggerFactory.getILoggerFactory()");
         return getProvider().getLoggerFactory();
     }
 
@@ -526,6 +535,9 @@ public final class LoggerFactory {
 
      * @return provider in use
      * @since 1.8.0
+     *
+     * </br>
+     * 获取提供者
      */
     static SLF4JServiceProvider getProvider() {
         // 初始化
@@ -539,6 +551,7 @@ public final class LoggerFactory {
         }
         switch (INITIALIZATION_STATE) {
         case SUCCESSFUL_INITIALIZATION:
+            // 初始化成功，返回提供者
             return PROVIDER;
         case NOP_FALLBACK_INITIALIZATION:
             return NOP_FALLBACK_SERVICE_PROVIDER;

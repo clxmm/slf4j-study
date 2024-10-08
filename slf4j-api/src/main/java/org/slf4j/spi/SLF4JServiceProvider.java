@@ -19,7 +19,11 @@ public interface SLF4JServiceProvider {
      * Return the instance of {@link ILoggerFactory} that 
      * {@link org.slf4j.LoggerFactory} class should bind to.
      * 
-     * @return instance of {@link ILoggerFactory} 
+     * @return instance of {@link ILoggerFactory}
+     *
+     * <p>
+     *     获取具体的ILoggerFactory 的实现类，由不同的日志提供商提供具体的实现
+     * </p>
      */
     public ILoggerFactory getLoggerFactory();
 
@@ -57,7 +61,11 @@ public interface SLF4JServiceProvider {
      * 
      * <p><b>WARNING:</b> This method is intended to be called once by 
      * {@link LoggerFactory} class and from nowhere else. 
-     * 
+     *
+     *
+     * <p>
+     *     SLF4JServiceProvider 初始化回调方法，
+     * </p>
      */
     public void initialize();
 }

@@ -84,18 +84,28 @@ public class SimpleLoggerConfiguration {
             defaultLogLevel = stringToLevel(defaultLogLevelString);
 
         // 读取配置文件中的其他属性
+        // 显示日志名称
         showLogName = getBooleanProperty(SimpleLogger.SHOW_LOG_NAME_KEY, SimpleLoggerConfiguration.SHOW_LOG_NAME_DEFAULT);
+        // 显示短日志名称
         showShortLogName = getBooleanProperty(SimpleLogger.SHOW_SHORT_LOG_NAME_KEY, SHOW_SHORT_LOG_NAME_DEFAULT);
+        // 显示日期时间
         showDateTime = getBooleanProperty(SimpleLogger.SHOW_DATE_TIME_KEY, SHOW_DATE_TIME_DEFAULT);
+        // 显示线程名称
         showThreadName = getBooleanProperty(SimpleLogger.SHOW_THREAD_NAME_KEY, SHOW_THREAD_NAME_DEFAULT);
+        // 显示线程ID
         showThreadId = getBooleanProperty(SimpleLogger.SHOW_THREAD_ID_KEY, SHOW_THREAD_ID_DEFAULT);
+        // 显示日期时间格式
         dateTimeFormatStr = getStringProperty(SimpleLogger.DATE_TIME_FORMAT_KEY, DATE_TIME_FORMAT_STR_DEFAULT);
+        // 显示日志级别在括号中
         levelInBrackets = getBooleanProperty(SimpleLogger.LEVEL_IN_BRACKETS_KEY, LEVEL_IN_BRACKETS_DEFAULT);
+        // 警告级别字符串
         warnLevelString = getStringProperty(SimpleLogger.WARN_LEVEL_STRING_KEY, WARN_LEVELS_STRING_DEFAULT);
 
+        // 日志文件
         logFile = getStringProperty(SimpleLogger.LOG_FILE_KEY, logFile);
-
+        // 缓存输出流
         cacheOutputStream = getBooleanProperty(SimpleLogger.CACHE_OUTPUT_STREAM_STRING_KEY, CACHE_OUTPUT_STREAM_DEFAULT);
+        // 选择输出方式
         outputChoice = computeOutputChoice(logFile, cacheOutputStream);
 
         if (dateTimeFormatStr != null) {
@@ -109,6 +119,7 @@ public class SimpleLoggerConfiguration {
 
     private void loadProperties() {
         // Add props from the resource simplelogger.properties
+        // 从资源simplelogger.properties中加载配置文件
         InputStream in = AccessController.doPrivileged((PrivilegedAction<InputStream>) () -> {
             ClassLoader threadCL = Thread.currentThread().getContextClassLoader();
             if (threadCL != null) {

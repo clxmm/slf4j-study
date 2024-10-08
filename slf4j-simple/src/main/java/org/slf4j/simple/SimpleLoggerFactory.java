@@ -41,7 +41,9 @@ public class SimpleLoggerFactory implements ILoggerFactory {
     ConcurrentMap<String, Logger> loggerMap;
 
     public SimpleLoggerFactory() {
+        // 初始化loggerMap
         loggerMap = new ConcurrentHashMap<>();
+        // 初始化SimpleLogger
         SimpleLogger.lazyInit();
     }
 
